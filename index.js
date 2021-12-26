@@ -16,6 +16,9 @@ function game() {
       } else if (pemain1 > 3 || pemain2 > 3) {
         alert(`nilai tidak boleh lebih dari 3`);
         game();
+      } else if (pemain1 < 1 || pemain2 < 1) {
+        alert(`nilai tidak boleh kurang dari 1`);
+        game();
       }
     } else if (confirm(`masukkan angka`) == true) {
       game();
@@ -25,32 +28,25 @@ function game() {
   }
   validasi();
 
-  function ulang() {
-    if (confirm(`Apakah anda ingin bermain lagi?`) == true) {
-      game();
-    } else {
-      alert(`Sampai jumpa di game berikutnya`);
-    }
-  }
-  if (pemain1 == 3) {
-    alert(`Tebakan : 3
+  let tebakan = Math.floor(Math.random() * 3) + 1;
+
+  if (pemain1 == tebakan) {
+    alert(`Tebakan : ${tebakan}
       Pemain 1 : ${pemain1}
       Pemain 2 : ${pemain2}
       selamat untuk Pemain 1
     `);
-    ulang();
-  } else if (pemain2 == 3) {
-    alert(`Tebakan : 3
+  } else if (pemain2 == tebakan) {
+    alert(`Tebakan : ${tebakan}
       Pemain 1 : ${pemain1}
       Pemain 2 : ${pemain2}
       selamat untuk Pemain 2
     `);
-    ulang();
-  } else {
-    confirm(`Tebakan : 3
-      Tidak ada yang menjawab dengan benar
-    `);
-    ulang();
   }
 }
-game();
+
+let ronde = 0;
+while (ronde < 3) {
+  game();
+  ronde++;
+}

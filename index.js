@@ -3,6 +3,9 @@ Anda diminta untuk menebak angka 1-3
 pemain dengan tebakan benar akan memenangkan game
 SELAMAT BERMAIN!
 `);
+const score = [0, 0];
+let tebakan = Math.floor(Math.random() * 3) + 1;
+
 function game() {
   let pemain1 = prompt("Pemain 1 : masukkan angka");
   let pemain2 = prompt("Pemain 2 : masukkan angka");
@@ -20,15 +23,9 @@ function game() {
         alert(`nilai tidak boleh kurang dari 1`);
         game();
       }
-    } else if (confirm(`masukkan angka`) == true) {
-      game();
-    } else {
-      alert(`Sampai jumpa di game berikutnya`);
     }
   }
   validasi();
-
-  let tebakan = Math.floor(Math.random() * 3) + 1;
 
   if (pemain1 == tebakan) {
     alert(`Tebakan : ${tebakan}
@@ -36,17 +33,28 @@ function game() {
       Pemain 2 : ${pemain2}
       selamat untuk Pemain 1
     `);
+    score[0] += 1;
   } else if (pemain2 == tebakan) {
     alert(`Tebakan : ${tebakan}
       Pemain 1 : ${pemain1}
       Pemain 2 : ${pemain2}
       selamat untuk Pemain 2
     `);
+    score[1] += 1;
   }
+  alert(`Score :
+  Pemain 1 : ${score[0]}
+  Pemain 2 : ${score[1]}`);
 }
-
 let ronde = 0;
 while (ronde < 3) {
   game();
+  if (ronde == 2) {
+    if (score[0] > score[1]) {
+      alert(`Selamat Pemain 1 memenangkan permainan`);
+    } else if (score[0] < score[1]) {
+      alert(`Selamat Pemain 2 memenangkan permainan`);
+    }
+  }
   ronde++;
 }
